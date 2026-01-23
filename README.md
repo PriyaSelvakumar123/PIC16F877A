@@ -1,6 +1,7 @@
 GPIO Driver – PIC16F877A ⭐
 
 A GPIO driver for PIC16F877A developed using pure register-level programming, without using any built-in header libraries,
+
 • follows Microchip datasheet register mapping
 • uses direct TRISx and PORTx control
 • designed for learning, reuse, and real hardware testing
