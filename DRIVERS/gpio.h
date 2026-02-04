@@ -18,6 +18,16 @@ typedef enum
     LOW=0
 } pinstate;
 
+typedef enum
+{
+PORT_A = 0,
+PORT_B = 1,
+PORT_C = 2,
+PORT_D = 3,
+PORT_E = 4,
+}port;
+
+
 /* ===== REGISTER DEFINITIONS ===== */
 /* PORT A */
 #define PORTA (*(volatile unsigned char *)0x05)
@@ -43,4 +53,7 @@ typedef enum
 /* ===== FUNCTION PROTOTYPES ===== */
 void GPIO_pinmode(int a, pinmode_t b);
 void GPIO_pinwrite(int a, pinstate b);
+void seven_segment(unsigned char a,port n);
+void dot_alphabet(const unsigned char a,port n1,port n2);
+
 #endif
