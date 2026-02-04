@@ -20,6 +20,10 @@ A GPIO driver for PIC16F877A developed using pure register-level programming, wi
 
 ✔ ADC disabled using ADCON1 where required
 
+✔ Displays hexadecimal characters on a seven-segment display
+
+✔ Displays a single uppercase alphabet character on an 8×8 LED dot matrix
+
 📁 File Structure
 
 GPIO_Driver/
@@ -37,6 +41,10 @@ GPIO_Driver/
 GPIO_pinmode(int pin,pinmode_t mode);
 
 GPIO_pinwrite(int pin,pinstate state);
+
+void seven_segment(unsigned char a,port n);
+
+void dot_alphabet(const unsigned char a,port n1,port n2 );
 
 🧠 Reference
 
