@@ -1,6 +1,6 @@
 //APPLICATION CODE
 
-void downcounter(int a ,port m )  //SINGLE DIGIT UPCOUNTER
+void downcounter(int a ,port m )  //SINGLE DIGIT DOWNCOUNTER
 {
         for(int i=a;i>=0;i--)
         {
@@ -10,7 +10,7 @@ void downcounter(int a ,port m )  //SINGLE DIGIT UPCOUNTER
         }
 }
 
-void upcounter(int a,port m)   //SINGLE DIGIT DOWNCOUNTER
+void upcounter(int a,port m)   //SINGLE DIGIT UPCOUNTER
 {
         for(int i=0;i<a;i++)
         {
