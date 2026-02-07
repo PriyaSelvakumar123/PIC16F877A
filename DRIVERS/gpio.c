@@ -92,33 +92,37 @@ void GPIO_pinwrite(int a,pinstate b)
     }
 }
 
-void seven_segment(unsigned char a,port n)
+void seven_segment(unsigned char a,port n)        //COMMON CATHODE - PRINT HEX VALUE (0 - F)
 {
-volatile unsigned char *port[] = { &PORTA,&PORTB,&PORTC,&PORTD,&PORTE };
-volatile unsigned char *tris[] = { &TRISA,&TRISB,&TRISC,&TRISD,&TRISE };
-volatile unsigned char *m,*t;
-
+   volatile unsigned char *port[] = { &PORTA,&PORTB,&PORTC,&PORTD,&PORTE };
+   volatile unsigned char *tris[] = { &TRISA,&TRISB,&TRISC,&TRISD,&TRISE };
+   volatile unsigned char *m,*t;
 
 unsigned char hex_digits[16] = {
-0xC0,0xF9,0xA4,0xB0,                      
-0x99,0x92,0x82,0xF8,                     //HEXAVALUE FOR 0 - F TO PRINT 7SEG
-0x80,0x90,0x88,0x83,
-0xC6,0xA1,0x86,0x8E
+    0x3F, 0x06, 0x5B, 0x4F,
+    0x66, 0x6D, 0x7D, 0x07,
+    0x7F, 0x6F, 0x77, 0x7C,
+    0x39, 0x5E, 0x79, 0x71
 };
-m = port[n];
-t=tris[n];
-*t=0X00;
-int i= a-'0';
-if(i>=0&& i<=9)
-{
-*m =hex_digits[i];
-}
-else if(i>17&&i<=23)
-{
-i=i-7;
-*m =hex_digits[i];
-}
-return;
+
+    m = port[n];
+    t=tris[n];
+    *t=0X00;
+    int i;
+    if (a >= '0' && a <= '9')
+    i = a - '0';
+    else if (a >= 'A' && a <= 'F')
+    i = a - 'A' + 10;
+
+    if(i>=0&& i<=9)
+    {
+      *m =hex_digits[i];
+    }
+    else if(i>=10&&i<16)
+    {
+        *m =hex_digits[i];
+    } 
+    return;
 }
 
 void dot_alphabet(const unsigned char a,port n1,port n2 )
