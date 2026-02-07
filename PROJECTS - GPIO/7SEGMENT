@@ -1,1 +1,21 @@
+//APPLICATION CODE
 
+void downcounter(int a ,port m )  //SINGLE DIGIT UPCOUNTER
+{
+        for(int i=a;i>=0;i--)
+        {
+            char n=(unsigned char)i+'0';
+            seven_segment(n,m);
+           __delay_ms(100);
+        }
+}
+
+void upcounter(int a,port m)   //SINGLE DIGIT DOWNCOUNTER
+{
+        for(int i=0;i<a;i++)
+        {
+            char n=(unsigned char)i+'0';
+            seven_segment(n,m);
+            __delay_ms(100);
+        }
+}
