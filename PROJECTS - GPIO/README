@@ -1,1 +1,6 @@
+FUNCTIONS IN APPLICATION CODE
 
+7SEGMENT
+
+void downcounter(int a ,port m ) 
+void upcounter(int a,port m)
