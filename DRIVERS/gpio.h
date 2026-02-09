@@ -97,17 +97,22 @@ void seven_segment_ANODE(unsigned char a, port n);
 void seven_segment_CATHODE(unsigned char a, port n);
 void four_digit_segment(unsigned int num, port seg, port mux);
 
+path : https://github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/seven_segment.c
+
 /* =========================================================
    KEYPAD
    ========================================================= */
 
 void keypad_scan(port n,port m);
 
+path : https://github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/keypad.c
+
 /* =========================================================
    DOT MATRIX
    ========================================================= */
 
 void dot_alphabet(const unsigned char a, port n1, port n2);
-void scroll_top_to_bottom(unsigned char ch, port n1, port n2);
+
+path : 
 
 #endif
