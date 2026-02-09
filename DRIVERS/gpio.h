@@ -87,7 +87,7 @@ void port_mode(port n, mode_t m);
 void port_write(port n, state m);
 int  port_read(port n);
 
-path : https://github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/gpio.c
+// path : https://github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/gpio.c
 
 /* =========================================================
    SEVEN SEGMENT
@@ -97,7 +97,7 @@ void seven_segment_ANODE(unsigned char a, port n);
 void seven_segment_CATHODE(unsigned char a, port n);
 void four_digit_segment(unsigned int num, port seg, port mux);
 
-path : https://github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/seven_segment.c
+// path : https://github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/seven_segment.c
 
 /* =========================================================
    KEYPAD
@@ -105,7 +105,7 @@ path : https://github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/seven_
 
 void keypad_scan(port n,port m);
 
-path : https://github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/keypad.c
+// path : https://github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/keypad.c
 
 /* =========================================================
    DOT MATRIX
@@ -113,6 +113,6 @@ path : https://github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/keypad
 
 void dot_alphabet(const unsigned char a, port n1, port n2);
 
-path : 
+// path : https://github.com/PriyaSelvakumar123/PIC16F877A/edit/main/DRIVERS/dotmatrix.c
 
 #endif
