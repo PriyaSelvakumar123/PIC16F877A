@@ -1,6 +1,0 @@
-FUNCTIONS IN APPLICATION CODE - USING OWN DRIVER
-
-7SEGMENT
-
-void downcounter(int a ,port m ) 
-void upcounter(int a,port m)
