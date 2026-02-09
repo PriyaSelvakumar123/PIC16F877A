@@ -99,7 +99,7 @@ void four_digit_segment(unsigned int num, port seg, port mux);
    KEYPAD
    ========================================================= */
 
-void keypad_scan(port n);
+void keypad_scan(port n,port m);
 
 /* =========================================================
    DOT MATRIX
