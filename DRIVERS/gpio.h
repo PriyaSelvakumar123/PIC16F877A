@@ -87,7 +87,7 @@ void port_mode(port n, mode_t m);
 void port_write(port n, state m);
 int  port_read(port n);
 
-link : https:github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/gpio.c
+
 /* =========================================================
    SEVEN SEGMENT
    ========================================================= */
