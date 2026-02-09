@@ -106,5 +106,6 @@ void keypad_scan(port n);
    ========================================================= */
 
 void dot_alphabet(const unsigned char a, port n1, port n2);
+void scroll_top_to_bottom(unsigned char ch, port n1, port n2);
 
 #endif
