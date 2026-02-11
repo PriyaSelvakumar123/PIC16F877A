@@ -1,0 +1,80 @@
+/*
+ * File:   LIFT.c
+ * Author: PRIYADHARSHINI.S
+ */
+
+#include "lift.h"
+
+int flag = 0; 
+void main(void) {
+
+    TRISB = 0x00;
+    TRISC = 0x00;
+    TRISD = 0x00;
+    ADCON1 = 0x06;    //FOR PORTA - GPIO
+    TRISA = 0xFF;
+    TRISE = 0x00;
+
+    PORTB = 0x00;
+    PORTC = 0x00;
+    PORTD = 0x00; 
+    PORTA = 0x00;
+    PORTE = 0x00;
+
+    while(1)
+    {
+        // FLOOR 0
+
+        if(RA0==1 && RA1==0 && RA2==0)
+        {
+            if(flag>0)
+            {
+                __delay_ms(1000);
+                PORTE = 0X00;
+                PORTE |= (1<<1);
+                PORTB = 0X06;
+                PORTC = 0X06;
+                PORTD = 0X06;
+                flag = 0;
+            }
+
+            __delay_ms(1000);
+            PORTE = 0x00;
+            PORTE |= (1<<0); 
+            PORTB = 0XBF;
+            PORTC = 0XBF;
+            PORTD = 0XBF; 
+        }
+
+        // FLOOR 1
+        else if(RA0==0 && RA1==1 && RA2==0)
+        {
+            __delay_ms(1000);
+            PORTE = 0X00;
+            PORTE |= (1<<1);
+            PORTB = 0X06;
+            PORTC = 0X06;
+            PORTD = 0X06;
+        }
+
+        // FLOOR 2
+        else if(RA0==0 && RA1==0 && RA2==1)
+        {
+            __delay_ms(1000);
+            PORTE = 0X00;
+            PORTE |= (1<<1);
+            PORTB = 0X06;
+            PORTC = 0X06;
+            PORTD = 0X06;
+
+            __delay_ms(1000); 
+
+            PORTE = 0X00;
+            PORTE |= (1<<2);
+            PORTB = 0X5B;
+            PORTC = 0X5B;
+            PORTD = 0X5B; 
+            flag = 1;
+        }
+    }
+}
