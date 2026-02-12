@@ -46,7 +46,7 @@ void seven_segment(unsigned char a,port n);
 
 void dot_alphabet(const unsigned char a,port n1,port n2 );
 
-🧠 Reference
+🧠 Reference  
 
 Microcontroller: PIC16F877A
 
