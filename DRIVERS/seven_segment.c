@@ -17,7 +17,6 @@ unsigned char seg[16] = {
 0xC6,0xA1,0x86,0x8E
 };
 
-
     m = port[n];
     t=tris[n];
     *t=0X00;
