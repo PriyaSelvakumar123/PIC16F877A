@@ -26,7 +26,7 @@ A GPIO driver for PIC16F877A developed using pure register-level programming, wi
 
 📁 File Structure
 
-GPIO_Driver/
+GPIO_Driver
 
 ├── gpio.h       // GPIO macros, data types, register definitions
 │
@@ -34,17 +34,44 @@ GPIO_Driver/
 ├── gpio.c       // GPIO driver implementation
 │
 
+├── led.c       // seven segment driver implementation
+│
+
+├── seven_segment.c       // seven segment driver implementation
+│
+
+├── keypad.c       // keypad driver implementation
+│
+
+├── dotmatrix.c       // dotmatrix driver implementation
+│
+
+└── README.md    // Project documentation
+
+PROJECT - GPIO
+
+├── APPLICATION CODE/PROJECT
+│
 └── README.md    // Project documentation
 
 📌 APIs
 
-GPIO_pinmode(int pin,pinmode_t mode);
+void GPIO_pin_mode(int a, mode_t b);
+void GPIO_pin_write(int a, state b);
+int  GPIO_pin_read(int a);
 
-GPIO_pinwrite(int pin,pinstate state);
+void port_mode(port n, mode_t m);
+void port_write(port n, state m);
+int  port_read(port n);
 
-void seven_segment(unsigned char a,port n);
+void seven_segment_ANODE(unsigned char a, port n);
+void seven_segment_CATHODE(unsigned char a, port n);
+void four_digit_segment(unsigned int num, port seg, port mux);
 
-void dot_alphabet(const unsigned char a,port n1,port n2 );
+void keypad_scan_calculator(port n,port m);
+char keypad_scan_phone(void);
+
+void dot_alphabet(const unsigned char a, port n1, port n2);
 
 🧠 Reference  
 
