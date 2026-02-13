@@ -27,18 +27,31 @@ Learning Centric:
 
 PIC16F877A-DriverLibrary/
 ├── inc/                    # Header files
+
 │   ├── gpio.h              # Core macros, register mappings, and prototypes
+
 │   ├── display.h           # Seven segment & Dot matrix definitions
+
 │   └── keypad.h            # Keypad scanning definitions
+
 ├── src/                    # Implementation files
+
 │   ├── gpio.c              # Core GPIO logic
+
 │   ├── led.c               # Basic LED blink routines
+
 │   ├── seven_segment.c     # 7-Segment display logic (Single & Multi-digit)
+
 │   ├── keypad.c            # Matrix keypad scanning
+
 │   └── dotmatrix.c         # 8x8 Dot Matrix alphabet rendering
+
 ├── examples/               # Application Demos
+
 │   ├── LIFT_System.c       # Smart Lift control simulation
+
 │   └── counters.c          # Up/Down counters for 7-segment
+
 └── README.md               # Project documentation
 
 
@@ -47,6 +60,7 @@ PIC16F877A-DriverLibrary/
 GPIO Control
          
          Function                                          Description
+         
 
 "void GPIO_pin_mode(int pin, mode_t m)"    -  Sets a specific physical pin to INPUT or OUTPUT.
 
