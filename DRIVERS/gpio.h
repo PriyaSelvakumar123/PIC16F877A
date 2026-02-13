@@ -79,23 +79,34 @@ extern volatile unsigned char *tris[];
    GPIO & PORT FUNCTIONS
    ========================================================= */
 
-void GPIO_pin_mode(int a, mode_t b);
-void GPIO_pin_write(int a, state b);
-int  GPIO_pin_read(int a);
+void GPIO_pin_mode(int a, mode_t b);     //PIN NO , INPUT OR OUTPUT
+void GPIO_pin_write(int a, state b);     //PIN NO , HIGH OR LOW
+int  GPIO_pin_read(int a);               //PIN NO
 
-void port_mode(port n, mode_t m);
-void port_write(port n, state m);
-int  port_read(port n);
+/* PORT MUST BE PORT_A/PORT_B/PORT_C/PORT_D/PORT_E */
+
+
+void port_mode(port n, mode_t m);        //PORT_NAME, INPUT OR OUTPUT
+void port_write(port n, state m);        //PORT_NAME, HIGH OR LOW
+int  port_read(port n);                  //RA4 CAN NOT BE INPUT AND OUTPUT //
 
 // path : https://github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/gpio.c
+
+/* =========================================================
+   LED
+   ========================================================= */
+
+void led_blink(int pin);                //PIN NO
+
+// path :https://github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/led.c
 
 /* =========================================================
    SEVEN SEGMENT
    ========================================================= */
 
-void seven_segment_ANODE(unsigned char a, port n);
+void seven_segment_ANODE(unsigned char a, port n);      // HEX - 0 - F , PORT_NAME
 void seven_segment_CATHODE(unsigned char a, port n);
-void four_digit_segment(unsigned int num, port seg, port mux);
+void four_digit_segment(unsigned int num, port seg, port mux);   // DEC 0 - 9 ,PORT_NAME (SEVEN SEG) ,PORT_NAME (SELECT LINE - 4)
 
 // path : https://github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/seven_segment.c
 
@@ -103,8 +114,8 @@ void four_digit_segment(unsigned int num, port seg, port mux);
    KEYPAD
    ========================================================= */
 
-void keypad_scan_calculator(port n,port m);
-char keypad_scan_phone(void);
+void keypad_scan_calculator(port n,port m);  //PORT_NAME (KEYPAD),PORT_NAME(SEVEN SEG)
+char keypad_scan_phone(void);                //DEFAULT - PORTB
 
 // path : https://github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/keypad.c
 
