@@ -25,13 +25,20 @@ Learning Centric:
 
 📁 Project StructurePlaintextPIC16F877A-DriverLibrary/
 
-├── inc/                    # Header files
-│   ├── gpio.h    
-│   ├── led.h              
-│   ├── seven_segment.h   
-│   ├── keypad.h           
-│   └── dotmatrix.h       
-├── src/                    # Implementation files
+├── inc/        # Header files
+
+│   ├── gpio.h 
+
+│   ├── led.h     
+
+│   ├── seven_segment.h  
+
+│   ├── keypad.h  
+
+│   └── dotmatrix.h  
+
+├── src/        # Implementation files
+
 │   ├── gpio.c              # Core GPIO logic
 │   ├── led.c               # Basic LED blink routines
 │   ├── seven_segment.c     # 7-Segment display logic (Single & Multi-digit)
