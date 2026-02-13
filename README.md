@@ -57,8 +57,13 @@ PROJECT - GPIO
 📌 APIs
 
 void GPIO_pin_mode(int a, mode_t b);
+
+
 void GPIO_pin_write(int a, state b);
+
+
 int  GPIO_pin_read(int a);
+
 
 void port_mode(port n, mode_t m);
 void port_write(port n, state m);
