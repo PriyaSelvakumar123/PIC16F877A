@@ -66,15 +66,29 @@ int  GPIO_pin_read(int a);
 
 
 void port_mode(port n, mode_t m);
+
+
 void port_write(port n, state m);
+
+
 int  port_read(port n);
 
+
+
 void seven_segment_ANODE(unsigned char a, port n);
+
+
 void seven_segment_CATHODE(unsigned char a, port n);
+
+
 void four_digit_segment(unsigned int num, port seg, port mux);
 
+
 void keypad_scan_calculator(port n,port m);
+
+
 char keypad_scan_phone(void);
+
 
 void dot_alphabet(const unsigned char a, port n1, port n2);
 
