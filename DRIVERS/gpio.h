@@ -104,7 +104,7 @@ void four_digit_segment(unsigned int num, port seg, port mux);
    ========================================================= */
 
 void keypad_scan_calculator(port n,port m);
-char keypad_scan_single(void);
+char keypad_scan_phone(void);
 
 // path : https://github.com/PriyaSelvakumar123/PIC16F877A/blob/main/DRIVERS/keypad.c
 
