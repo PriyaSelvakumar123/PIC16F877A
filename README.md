@@ -26,6 +26,7 @@ Learning Centric:
 📁 Project StructurePlaintextPIC16F877A-DriverLibrary/
 
 PIC16F877A-DriverLibrary/
+
 ├── inc/                    # Header files
 
 │   ├── gpio.h              # Core macros, register mappings, and prototypes
