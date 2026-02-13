@@ -15,6 +15,7 @@ GPIO.H
 
 #define  SETHIGH(n,port)  (port |=  (1<<(n)))
 #define  SETLOW(n,port)   (port &= ~(1<<(n)))
+#define  SETTOGGLE(n,port) (port^=(1<<(n)))
 
 /* =========================================================
    TYPE DEFINITIONS
@@ -41,105 +42,6 @@ typedef enum
     PORT_E = 4
 } port;
 
-/* =========================================================
-   REGISTER DEFINITIONS
-   ========================================================= */
-
-/* PORTA */
-#define PORTA (*(volatile unsigned char *)0x05)
-#define TRISA (*(volatile unsigned char *)0x85)
-#define ADCON1(*(volatile unsigned char *)0x9F)
-
-/* PORTB */
-#define PORTB (*(volatile unsigned char *)0x06)
-#define TRISB (*(volatile unsigned char *)0x86)
-
-/* PORTC */
-#define PORTC (*(volatile unsigned char *)0x07)
-#define TRISC (*(volatile unsigned char *)0x87)
-
-/* PORTD */
-#define PORTD (*(volatile unsigned char *)0x08)
-#define TRISD (*(volatile unsigned char *)0x88)
-
-/* PORTE */
-#define PORTE (*(volatile unsigned char *)0x09)
-#define TRISE (*(volatile unsigned char *)0x89)
-
-/*SPECIAL FUNCTIONS*/
-#define STATUS       (*(volatile unsigned char *)0x03)
-#define OPTIONAL_REG (*(volatile unsigned char *)0x81)
-
-
-/* =========================================================
-   GLOBAL VARIABLES (DEFINED IN .c)
-   ========================================================= */
-
-extern volatile unsigned char *port_s[];
-extern volatile unsigned char *tris[];
-
-/* =========================================================
-   GPIO & PORT FUNCTIONS
-   ========================================================= */
-
-void GPIO_pin_mode(int a, mode_t b);     //PIN NO , INPUT OR OUTPUT
-void GPIO_pin_write(int a, state b);     //PIN NO , HIGH OR LOW
-int  GPIO_pin_read(int a);               //PIN NO
-
-/* PORT MUST BE PORT_A/PORT_B/PORT_C/PORT_D/PORT_E */
-
-
-void port_mode(port n, mode_t m);        //PORT_NAME, INPUT OR OUTPUT
-void port_write(port n, state m);        //PORT_NAME, HIGH OR LOW
-int  port_read(port n);                  //RA4 CAN NOT BE INPUT AND OUTPUT //
-
-
-
-#include<stdint.h>
-#include<xc.h>
-#define  SETIN(n,port)  (port|=1<<(n))
-#define  SETOUT(n,port) ( port&=~(1<<(n)))
-#define  SETTOGGLE(n,port) (port^=(1<<(n)))
-#define SETPORT(n, port)        \
-    do {                        \
-        if ((n) == 0)           \
-            (port) = 0xFF;      \
-        else                    \
-            (port) = 0x00;      \
-    } while(0)
-
-typedef enum
-{
-    OUTPUT = 0,
-    INPUT  = 1,
-           
-} pinmode_t;
-typedef enum
-{
-    LOW = 0,
-    HIGH = 1,
-    TOGGLE = 2,
-}pinstate;
-
-typedef enum
-{
-    PORT_A = 0,
-    PORT_B = 1,
-    PORT_C = 2,
-    PORT_D = 3,
-    PORT_E = 4,
-      
-}port;
-
-typedef enum
-{
-    
-    TRIS_A = 0,
-    TRIS_B = 1,
-    TRIS_C = 2, 
-    TRIS_D = 3, 
-    TRIS_E = 4,   
-}triss;
 typedef struct {
     unsigned char RA0:1;
     unsigned char RA1:1;
@@ -191,43 +93,60 @@ typedef struct {
    
 } rege_bits;
 
-#define  SETHIGH(n,port) (port|=1<<(n))
-#define  SETLOW(n,port)  (port&=~(1<<(n)))
 
-#ifndef PORT
-#define PORTA (*(volatile unsigned char *)0X05)
+/* =========================================================
+   REGISTER DEFINITIONS
+   ========================================================= */
+
+/* PORTA */
+#define PORTA (*(volatile unsigned char *)0x05)
 #define PORTAbits (*(volatile rega_bits*)0X05)
-#define TRISA (*(volatile unsigned char *)0X85 )  //PORT A//
-#define TRISAbits (*(volatile rega_bits *)0X85)
-#define ADCON1 (*(volatile unsigned char*)0x9f)
-#define STATUS (*(volatile unsigned char*)0x03)
+#define TRISA (*(volatile unsigned char *)0x85)
+#define ADCON1(*(volatile unsigned char *)0x9F)
 
-#define PORTB (*(volatile unsigned char *)0X06)
+/* PORTB */
+#define PORTB (*(volatile unsigned char *)0x06)
 #define PORTBbits (*(volatile unsigned regb_bits *)0X06)
-#define TRISB (*(volatile unsigned char *)0X86 )  //PORT B//
-#define TRISBbits (*(volatile unsigned regb_bits *)0X86 ) 
-#define OPTIONAL_REG (*(volatile unsigned char *)0X81)
+#define TRISB (*(volatile unsigned char *)0x86)
 
-#define  TMR0 (*(volatile unsigned char*)0x101)
-
-#define PORTC (*(volatile unsigned char * ) 0X07)
+/* PORTC */
+#define PORTC (*(volatile unsigned char *)0x07)
 #define PORTCbits (*(volatile unsigned regc_bits * ) 0X07)
-#define TRISC (*(volatile unsigned char * )0X87)  //PORT C//
-#define TRISCbits (*(volatile unsigned regc_bits * )0X87) 
+#define TRISC (*(volatile unsigned char *)0x87)
 
-#define PORTD (*(volatile unsigned char * )0X08)
+/* PORTD */
+#define PORTD (*(volatile unsigned char *)0x08)
 #define PORTDbits (*(volatile unsigned regd_bits * )0X08)
-#define TRISD (*(volatile unsigned char *)0X88 )  //PORT D//
-#define TRISDbits (*(volatile unsigned regd_bits *)0X88 )  
+#define TRISD (*(volatile unsigned char *)0x88)
 
-#define PORTE (*(volatile unsigned char *)0X09)
+/* PORTE */
+#define PORTE (*(volatile unsigned char *)0x09)
 #define PORTEbits (*(volatile unsigned rege_bits *)0X09)
-#define TRISE (*(volatile unsigned char *)0x89)   //PORT E//
-#define TRISEbits (*(volatile unsigned rege_bits *)0x89) 
-#define INTCON (*(volatile unsigned char *)0x0B)
-#define TMRO (*(volatile unsigned char *)0X01)
+#define TRISE (*(volatile unsigned char *)0x89)
 
-#endif
+/*SPECIAL FUNCTIONS*/
+#define STATUS       (*(volatile unsigned char *)0x03)
+#define OPTIONAL_REG (*(volatile unsigned char *)0x81)
 
-volatile unsigned char *port_s[] = { &PORTA,&PORTB,&PORTC,&PORTD,&PORTE };
-volatile unsigned char *tris[] = { &TRISA,&TRISB,&TRISC,&TRISD,&TRISE };
+
+/* =========================================================
+   GLOBAL VARIABLES (DEFINED IN .c)
+   ========================================================= */
+
+extern volatile unsigned char *port_s[];
+extern volatile unsigned char *tris[];
+
+/* =========================================================
+   GPIO & PORT FUNCTIONS
+   ========================================================= */
+
+void GPIO_pin_mode(int a, mode_t b);     //PIN NO , INPUT OR OUTPUT
+void GPIO_pin_write(int a, state b);     //PIN NO , HIGH OR LOW
+int  GPIO_pin_read(int a);               //PIN NO
+
+
+void port_mode(port n, mode_t m);        //PORT_NAME, INPUT OR OUTPUT
+void port_write(port n, state m);        //PORT_NAME, HIGH OR LOW
+int  port_read(port n);                  //RA4 CAN NOT BE INPUT AND OUTPUT //
+
+#end if
