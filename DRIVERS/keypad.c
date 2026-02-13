@@ -46,5 +46,35 @@ void keypad_scan(port n,port m)
           }  
           
      }
-   
 }
+
+char keypad_scan_phone(void)
+{
+    unsigned char row;
+    unsigned char keymap[4][3] =
+    {
+        {'1','2','3'},
+        {'4','5','6'},
+        {'7','8','9'},
+        {'*','0','#'}
+    };
+
+    TRISB = 0b01110000;
+    OPTION_REG &= ~(1<<7);    // Enable PORTB pull-ups
+
+    PORTB = 0x0F;             // All rows HIGH
+
+    for(row = 0; row < 4; row++)
+    {
+        PORTB = 0x0F & ~(1 << row);   // One row LOW
+        __delay_us(200);               // Debounce
+
+        if(!(PORTB & (1<<4))) return keymap[row][0];
+        if(!(PORTB & (1<<5))) return keymap[row][1];
+        if(!(PORTB & (1<<6))) return keymap[row][2];
+    }
+
+    return 0;   // No key pressed
+}
+
+
