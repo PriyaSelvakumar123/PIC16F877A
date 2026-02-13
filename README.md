@@ -77,7 +77,7 @@ GPIO Control
 "void GPIO_pin_write(int pin, state s)"    -  Writes HIGH (1) or LOW (0) to a specific pin.
 
 
-int GPIO_pin_read(int pin)                 -  Returns the current digital state of a pin.
+"int GPIO_pin_read(int pin)"               -  Returns the current digital state of a pin.
 
 
 "void port_mode(port n, mode_t m)"         -  Configures an entire port (A-E) at once.
