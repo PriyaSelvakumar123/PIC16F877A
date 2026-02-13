@@ -35,33 +35,33 @@ Learning Centric:
 
 PIC16F877A-DriverLibrary/
 
-├── inc/                    # Header files
+├── inc/                        # Header files
 
-│   ├── gpio.h              # Core macros, register mappings, and prototypes
+│   ├── gpio.h              
 
-│   ├── display.h           # Seven segment & Dot matrix definitions
+│   ├── display.h           
 
-│   └── keypad.h            # Keypad scanning definitions
+│   └── keypad.h           
 
-├── src/                    # Implementation files
+├── src/                        # Implementation files
 
-│   ├── gpio.c              # Core GPIO logic
+│   ├── gpio.c             
 
-│   ├── led.c               # Basic LED blink routines
+│   ├── led.c               
 
-│   ├── seven_segment.c     # 7-Segment display logic (Single & Multi-digit)
+│   ├── seven_segment.c     
 
-│   ├── keypad.c            # Matrix keypad scanning
+│   ├── keypad.c            
 
-│   └── dotmatrix.c         # 8x8 Dot Matrix alphabet rendering
+│   └── dotmatrix.c         
 
-├── examples/               # Application Demos
+├── examples/              
 
-│   ├── LIFT_System.c       # Smart Lift control simulation
+│   ├── LIFT_System.c       
 
-│   └── counters.c          # Up/Down counters for 7-segment
+│   └── counters.c          
 
-└── README.md               # Project documentation
+└── README.md                  # Project documentation
 
 
 📌 Core API Reference
