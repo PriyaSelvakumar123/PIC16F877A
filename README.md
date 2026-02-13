@@ -2,24 +2,32 @@ GPIO Driver Library – PIC16F877A
 
 ⭐A high-performance, register-level GPIO driver library for the Microchip PIC16F877A microcontroller.
 
+
 Developed using pure register-level programming (bypassing standard built-in header libraries where possible) to provide deep control over hardware and minimize overhead.
 
+
 🔧 FeaturesFull Port Control: 
+
         Comprehensive support for PORTA through PORTE.
         
 Register-Based: 
+
         Direct manipulation of TRISx and PORTx registers.
         
 ADC Management:
+
         Automatic disabling of analog functions via ADCON1 for digital I/O stability.
         
 Seven-Segment Support: 
+
         Dedicated APIs for Common Anode/Cathode displays (Hexadecimal support).
         
 Matrix & Keypad:
+
         Integrated drivers for 8x8 LED Dot Matrices and 4x4 Keypad scanning (Phone/Calculator layouts).
         
 Learning Centric:
+
         Ideal for students and engineers transitiong from library-dependency to bare-metal firmware development.
 
 
@@ -65,13 +73,18 @@ GPIO Control
 
 "void GPIO_pin_mode(int pin, mode_t m)"    -  Sets a specific physical pin to INPUT or OUTPUT.
 
+
 "void GPIO_pin_write(int pin, state s)"    -  Writes HIGH (1) or LOW (0) to a specific pin.
+
 
 int GPIO_pin_read(int pin)                 -  Returns the current digital state of a pin.
 
+
 "void port_mode(port n, mode_t m)"         -  Configures an entire port (A-E) at once.
 
+
 void GPIO_pin_mode(int pin, mode_t m)      -  Sets a specific physical pin to INPUT or OUTPUT.
+
 
 ⚠️ Critical Hardware Notes for GPIO
 
