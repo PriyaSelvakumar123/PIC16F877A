@@ -5,7 +5,7 @@
    GLOBAL ARRAY DEFINITIONS
    ========================================================= */
 
-volatile uint8_t *port_registers[] =
+volatile uint8_t *port_s[] =
 {
     &PORTA,
     &PORTB,
@@ -14,7 +14,7 @@ volatile uint8_t *port_registers[] =
     &PORTE
 };
 
-volatile uint8_t *tris_registers[] =
+volatile uint8_t *tris[] =
 {
     &TRISA,
     &TRISB,
@@ -27,45 +27,44 @@ volatile uint8_t *tris_registers[] =
    GPIO PIN MODE FUNCTION
    ========================================================= */
 
-void GPIO_pin_mode(uint8_t pin_number, mode_t pin_mode)       
+void GPIO_pin_mode(int pin_number, mode_t pin_mode)
 {
-   
-    if(pin_number >= 2 && pin_number <= 7)                    // PORTA
+    if(pin_number >= 2 && pin_number <= 7)                // PORTA
     {
-        ADCON1 = 0x06;                                        // ADCON1 USED FOR PORTE AS DIGITAL INPUT OR OUTPUT
+        ADCON1 = 0x06;   // Make PORTA digital
 
-
-        if(pin_mode==OUTPUT)
-            SETOUT(pin_number - 2,TRISA);
+        if(pin_mode == OUTPUT)
+            SETOUT(pin_number - 2, TRISA);
         else
-            SETIN(pin_number - 2,TRISA);
-    }
-    else if(pin_number >= 33 && pin_number <= 40)            // PORTB               
-    {
-        if(pin_mode==OUTPUT)
-            SETOUT(pin_number - 33,TRISB);
-        else
-            SETIN(pin_number - 33,TRISB);
+            SETIN(pin_number - 2, TRISA);
     }
 
-    else if((pin_number > 14 && pin_number < 19) ||         // PORTC
-            (pin_number > 22 && pin_number < 27))
+    else if(pin_number >= 33 && pin_number <= 40)         // PORTB
+    {
+        if(pin_mode == OUTPUT)
+            SETOUT(pin_number - 33, TRISB);
+        else
+            SETIN(pin_number - 33, TRISB);
+    }
+
+    else if((pin_number > 14 && pin_number < 19) ||
+            (pin_number > 22 && pin_number < 27))         // PORTC
     {
         uint8_t bit;
-       
+
         if(pin_number < 19)
             bit = pin_number - 15;
         else
             bit = pin_number - 19;
 
         if(pin_mode == OUTPUT)
-            SETOUT(bit,TRISC);
+            SETOUT(bit, TRISC);
         else
-            SETIN(bit,TRISC);
+            SETIN(bit, TRISC);
     }
 
-    else if((pin_number > 18 && pin_number < 23) ||       // PORTD
-            (pin_number > 26 && pin_number < 31))
+    else if((pin_number > 18 && pin_number < 23) ||
+            (pin_number > 26 && pin_number < 31))         // PORTD
     {
         uint8_t bit;
 
@@ -75,14 +74,14 @@ void GPIO_pin_mode(uint8_t pin_number, mode_t pin_mode)
             bit = pin_number - 23;
 
         if(pin_mode == OUTPUT)
-            SETOUT(bit,TRISD);
+            SETOUT(bit, TRISD);
         else
-            SETIN(bit,TRISD);
+            SETIN(bit, TRISD);
     }
 
-    else if(pin_number > 7 && pin_number < 11)         // PORTE
+    else if(pin_number > 7 && pin_number < 11)            // PORTE
     {
-        ADCON1 = 0x06;                                 // ADCON1 USED FOR PORTE AS DIGITAL INPUT OR OUTPUT
+        ADCON1 = 0x06;
 
         if(pin_mode == OUTPUT)
             SETOUT(pin_number - 8, TRISE);
@@ -95,9 +94,9 @@ void GPIO_pin_mode(uint8_t pin_number, mode_t pin_mode)
    GPIO PIN WRITE FUNCTION
    ========================================================= */
 
-void GPIO_pin_write(uint8_t pin_number, state pin_state)
+void GPIO_pin_write(int pin_number, state pin_state)
 {
-    if(pin_number >= 33 && pin_number <= 40)
+    if(pin_number >= 33 && pin_number <= 40)              // PORTB
     {
         if(pin_state == LOW)
             SETLOW(pin_number - 33, PORTB);
@@ -105,7 +104,7 @@ void GPIO_pin_write(uint8_t pin_number, state pin_state)
             SETHIGH(pin_number - 33, PORTB);
     }
 
-    else if(pin_number >= 2 && pin_number <= 7)
+    else if(pin_number >= 2 && pin_number <= 7)           // PORTA
     {
         if(pin_state == LOW)
             SETLOW(pin_number - 2, PORTA);
@@ -114,7 +113,7 @@ void GPIO_pin_write(uint8_t pin_number, state pin_state)
     }
 
     else if((pin_number > 14 && pin_number < 19) ||
-            (pin_number > 22 && pin_number < 27))
+            (pin_number > 22 && pin_number < 27))         // PORTC
     {
         uint8_t bit;
 
@@ -130,7 +129,7 @@ void GPIO_pin_write(uint8_t pin_number, state pin_state)
     }
 
     else if((pin_number > 18 && pin_number < 23) ||
-            (pin_number > 26 && pin_number < 31))
+            (pin_number > 26 && pin_number < 31))         // PORTD
     {
         uint8_t bit;
 
@@ -145,7 +144,7 @@ void GPIO_pin_write(uint8_t pin_number, state pin_state)
             SETHIGH(bit, PORTD);
     }
 
-    else if(pin_number > 7 && pin_number < 11)
+    else if(pin_number > 7 && pin_number < 11)            // PORTE
     {
         if(pin_state == LOW)
             SETLOW(pin_number - 8, PORTE);
@@ -158,7 +157,7 @@ void GPIO_pin_write(uint8_t pin_number, state pin_state)
    GPIO PIN READ FUNCTION
    ========================================================= */
 
-uint8_t GPIO_pin_read(uint8_t pin_number)
+int GPIO_pin_read(int pin_number)
 {
     if(pin_number >= 33 && pin_number <= 40)
         return (PORTB & (1 << (pin_number - 33))) ? 1 : 0;
@@ -204,7 +203,7 @@ uint8_t GPIO_pin_read(uint8_t pin_number)
 
 void port_mode(port port_name, mode_t port_mode)
 {
-    volatile uint8_t *tris_register = tris_registers[port_name];
+    volatile uint8_t *tris_register = tris[port_name];
 
     if(port_mode == INPUT)
         *tris_register = 0xFF;
@@ -214,7 +213,7 @@ void port_mode(port port_name, mode_t port_mode)
 
 void port_write(port port_name, state port_state)
 {
-    volatile uint8_t *port_register = port_registers[port_name];
+    volatile uint8_t *port_register = port_s[port_name];
 
     if(port_state == HIGH)
         *port_register = 0xFF;
@@ -222,9 +221,8 @@ void port_write(port port_name, state port_state)
         *port_register = 0x00;
 }
 
-uint8_t port_read(port port_name)
+int port_read(port port_name)
 {
-    volatile uint8_t *port_register = port_registers[port_name];
-
+    volatile uint8_t *port_register = port_s[port_name];
     return *port_register;
 }
