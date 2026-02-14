@@ -1,4 +1,4 @@
-GPIO Driver Library – PIC16F877A 
+GPIO Driver Library – PIC16F877A (8BIT)
 
 ⭐A high-performance, register-level GPIO driver library for the Microchip PIC16F877A microcontroller.
 
