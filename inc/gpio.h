@@ -131,19 +131,19 @@ typedef struct {
    GLOBAL VARIABLES (DEFINED IN .c)
    ========================================================= */
 
-extern volatile unsigned char *port_s[];
-extern volatile unsigned char *tris[];
+extern volatile uint8_t *port_s[];
+extern volatile uint8_t *tris[];
 
 /* =========================================================
    GPIO & PORT FUNCTIONS
    ========================================================= */
 
-void GPIO_pin_mode(int pin_no, mode_t pin_mode);     // MODE - INPUT OR OUTPUT
-void GPIO_pin_write(int pin_no, state pin_state);     //STATE - HIGH OR LOW
-int  GPIO_pin_read(int pin_no);           
+void GPIO_pin_mode(uint8_t pin_no, mode_t pin_mode);     // MODE - INPUT OR OUTPUT
+void GPIO_pin_write(uint8_t pin_no, state pin_state);     //STATE - HIGH OR LOW
+uint8_t  GPIO_pin_read(uint8_t pin_no);           
 
 
 void port_mode(port port_name, mode_t port_mode);        // MODE - INPUT OR OUTPUT
 void port_write(port port_name, state port_state);         //STATE - HIGH OR LOW
-int  port_read(port n);                 
+uint8_t port_read(port n);                 
 #end if
