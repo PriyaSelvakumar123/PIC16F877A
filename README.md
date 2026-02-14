@@ -71,19 +71,19 @@ GPIO Control
          Function                                          Description
          
 
-"void GPIO_pin_mode(int pin, mode_t m)"    -  Sets a specific physical pin to INPUT or OUTPUT.
+    void GPIO_pin_mode(int pin, mode_t m)    -  Sets a specific physical pin to INPUT or OUTPUT.
 
 
-"void GPIO_pin_write(int pin, state s)"    -  Writes HIGH (1) or LOW (0) to a specific pin.
+    void GPIO_pin_write(int pin, state s)     -  Writes HIGH (1) or LOW (0) to a specific pin.
 
 
-"int GPIO_pin_read(int pin)"               -  Returns the current digital state of a pin.
+    int GPIO_pin_read(int pin)               -  Returns the current digital state of a pin.
 
 
-"void port_mode(port n, mode_t m)"         -  Configures an entire port (A-E) at once.
+    void port_mode(port n, mode_t m)         -  Configures an entire port (A-E) at once.
 
 
-void GPIO_pin_mode(int pin, mode_t m)      -  Sets a specific physical pin to INPUT or OUTPUT.
+    void GPIO_pin_mode(int pin, mode_t m)      -  Sets a specific physical pin to INPUT or OUTPUT.
 
 
 ⚠️ Critical Hardware Notes for GPIO
