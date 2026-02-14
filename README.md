@@ -74,7 +74,7 @@ GPIO Control
     void GPIO_pin_mode(int pin, mode_t m)    -  Sets a specific physical pin to INPUT or OUTPUT.
 
 
-    void GPIO_pin_write(int pin, state s)     -  Writes HIGH (1) or LOW (0) to a specific pin.
+    void GPIO_pin_write(int pin, state s)    -  Writes HIGH (1) or LOW (0) to a specific pin.
 
 
     int GPIO_pin_read(int pin)               -  Returns the current digital state of a pin.
@@ -83,28 +83,30 @@ GPIO Control
     void port_mode(port n, mode_t m)         -  Configures an entire port (A-E) at once.
 
 
-    void GPIO_pin_mode(int pin, mode_t m)      -  Sets a specific physical pin to INPUT or OUTPUT.
+    void GPIO_pin_mode(int pin, mode_t m)    -  Sets a specific physical pin to INPUT or OUTPUT.
 
 
 ⚠️ Critical Hardware Notes for GPIO
 
-The ADCON1 Register
+⚠️ The ADCON1 Register
 
-On the PIC16F877A, PORTA and PORTE pins are multiplexed with Analog-to-Digital Converter (ADC) inputs. On power-up, they default to Analog mode.
+ On the PIC16F877A, PORTA and PORTE pins are multiplexed with Analog-to-Digital Converter (ADC) inputs. On power-up, they default to Analog mode.
 
-  📚  Fix: To use them as digital GPIO, you must set ADCON1 = 0x06 (or 0x07). This switches          the  pins to Digital mode so your TRIS settings actually take effect.
+📚  Fix: To use them as digital GPIO, you must set ADCON1 = 0x06 (or 0x07). This switches the  pins to Digital mode so your TRIS settings actually take effect.
     
-The Open-Drain Pin (RA4)
+⚠️The Open-Drain Pin (RA4)
 
 Pin RA4 is unique. It is an Open-Drain output.
 
-  📚  Behavior: It can pull a signal to Ground (LOW), but it cannot pull it to VCC (HIGH) on         its own.
+  📚  Behavior: It can pull a signal to Ground (LOW), but it cannot pull it to VCC (HIGH) on its own.
   
-  📚  Requirement: You must use an external pull-up resistor (typically 10k ohm) if you want         to use RA4 as a digital output.
+  📚  Requirement: You must use an external pull-up resistor (typically 10k ohm) if you want to use RA4 as a digital output.
   
-PORTB Pull-ups
+⚠️PORTB Pull-ups
 
-  📚  Your keypad.c driver uses OPTION_REG &= ~(1<<7). This enables internal weak pull-up             resistors on PORTB. This is a great hardware-saving feature that eliminates the need for        8 external resistors when connecting a keypad.
+  📚  Your keypad.c driver uses OPTION_REG &= ~(1<<7). This enables internal weak pull-up resistors on PORTB. This is a great hardware-saving feature that eliminates the need for 8 external resistors 
+  
+  when connecting a keypad.
 
 
 Peripherals
@@ -112,13 +114,13 @@ Peripherals
         Function                                              Description
 
         
-"seven_segment_ANODE(char a, port n)"      -   Displays Hex char (0-F) on Common Anode segment.
+    seven_segment_ANODE(char a, port n)      -   Displays Hex char (0-F) on Common Anode segment.
 
-"seven_segment_CATHODE(char a, port n)"    -   Displays Hex char (0-F) on Common Cathode segment.
+    seven_segment_CATHODE(char a, port n)    -   Displays Hex char (0-F) on Common Cathode segment.
 
-"keypad_scan_phone()"                      -   Scans a 4x3/4x4 keypad and returns the char pressed.
+    keypad_scan_phone()                      -   Scans a 4x3/4x4 keypad and returns the char pressed.
 
-"dot_alphabet(char a, port n1, port n2)"   -   Renders an uppercase letter on an 8x8 LED Matrix.
+    dot_alphabet(char a, port n1, port n2)   -   Renders an uppercase letter on an 8x8 LED Matrix.
 
 
 🧠 Technical ReferenceMicrocontroller:
