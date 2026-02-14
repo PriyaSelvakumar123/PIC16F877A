@@ -4,6 +4,6 @@
    LED
    ========================================================= */
 
-void led_blink(int pin);                //PIN NO
+void led_blink(uint_8 pin);                //PIN NO
 
 
