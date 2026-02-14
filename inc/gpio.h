@@ -50,7 +50,7 @@ typedef struct {
     unsigned char RA4:1;
     unsigned char RA5:1;
     
-} rega_bits;
+} register_a_bits;
 typedef struct {
     unsigned char RB0:1;
     unsigned char RB1:1;
@@ -61,7 +61,7 @@ typedef struct {
     unsigned char RB6:1;
     unsigned char RB7:1;
  
-} regb_bits;
+}  register_b_bits;
 typedef struct {
     unsigned char RC0:1;
     unsigned char RC1:1;
@@ -72,8 +72,7 @@ typedef struct {
     unsigned char RC6:1;
     unsigned char RC7:1;
  
-} regc_bits;
-
+}  register_c_bits;
 typedef struct {
     unsigned char RD0:1;
     unsigned char RD1:1;
@@ -84,14 +83,14 @@ typedef struct {
     unsigned char RD6:1;
     unsigned char RD7:1;
  
-} regd_bits;
+} register_d_bits;
 
 typedef struct {
     unsigned char RE0:1;
     unsigned char RE1:1;
     unsigned char RE2:1;
    
-} rege_bits;
+}  register_e_bits;
 
 
 /* =========================================================
@@ -100,28 +99,28 @@ typedef struct {
 
 /* PORTA */
 #define PORTA (*(volatile unsigned char *)0x05)
-#define PORTAbits (*(volatile rega_bits*)0X05)
+#define portabits (*(volatile register_a_bits*)0X05)
 #define TRISA (*(volatile unsigned char *)0x85)
 #define ADCON1(*(volatile unsigned char *)0x9F)
 
 /* PORTB */
 #define PORTB (*(volatile unsigned char *)0x06)
-#define PORTBbits (*(volatile unsigned regb_bits *)0X06)
+#define portbbits (*(volatile unsigned register_b_bits *)0X06)
 #define TRISB (*(volatile unsigned char *)0x86)
 
 /* PORTC */
 #define PORTC (*(volatile unsigned char *)0x07)
-#define PORTCbits (*(volatile unsigned regc_bits * ) 0X07)
+#define portcbits (*(volatile unsigned register_c_bits * ) 0X07)
 #define TRISC (*(volatile unsigned char *)0x87)
 
 /* PORTD */
 #define PORTD (*(volatile unsigned char *)0x08)
-#define PORTDbits (*(volatile unsigned regd_bits * )0X08)
+#define portdbits (*(volatile unsigned register_d_bits * )0X08)
 #define TRISD (*(volatile unsigned char *)0x88)
 
 /* PORTE */
 #define PORTE (*(volatile unsigned char *)0x09)
-#define PORTEbits (*(volatile unsigned rege_bits *)0X09)
+#define portebits (*(volatile unsigned register_e_bits *)0X09)
 #define TRISE (*(volatile unsigned char *)0x89)
 
 /*SPECIAL FUNCTIONS*/
@@ -140,13 +139,12 @@ extern volatile unsigned char *tris[];
    GPIO & PORT FUNCTIONS
    ========================================================= */
 
-void GPIO_pin_mode(int a, mode_t b);     //PIN NO , INPUT OR OUTPUT
-void GPIO_pin_write(int a, state b);     //PIN NO , HIGH OR LOW
-int  GPIO_pin_read(int a);               //PIN NO
+void GPIO_pin_mode(int pin_no, mode_t pin_mode);     // MODE - INPUT OR OUTPUT
+void GPIO_pin_write(int pin_no, state pin_mode);     //STATE - HIGH OR LOW
+int  GPIO_pin_read(int pin_no);           
 
 
-void port_mode(port n, mode_t m);        //PORT_NAME, INPUT OR OUTPUT
-void port_write(port n, state m);        //PORT_NAME, HIGH OR LOW
-int  port_read(port n);                  //RA4 CAN NOT BE INPUT AND OUTPUT //
-
+void port_mode(port port_name, mode_t port_mode);        // MODE - INPUT OR OUTPUT
+void port_write(port port_name, state port_mode);         //STATE - HIGH OR LOW
+int  port_read(port n);                 
 #end if
