@@ -4,7 +4,6 @@ GPIO.H
 #ifndef GPIO_H
 #define GPIO_H
 
-#include <xc.h>
 
 /* =========================================================
    MACROS
@@ -83,14 +82,14 @@ typedef struct {
     unsigned char RD6:1;
     unsigned char RD7:1;
  
-} register_d_bits;
+}register_d_bits;
 
 typedef struct {
     unsigned char RE0:1;
     unsigned char RE1:1;
     unsigned char RE2:1;
    
-}  register_e_bits;
+} register_e_bits;
 
 
 /* =========================================================
@@ -101,7 +100,7 @@ typedef struct {
 #define PORTA (*(volatile unsigned char *)0x05)
 #define portabits (*(volatile register_a_bits*)0X05)
 #define TRISA (*(volatile unsigned char *)0x85)
-#define ADCON1(*(volatile unsigned char *)0x9F)
+#define ADCON1(*(volatile unsigned char *)0x9F)                   /* SET PORTA AS DIGITAL IO PIN */
 
 /* PORTB */
 #define PORTB (*(volatile unsigned char *)0x06)
@@ -124,7 +123,7 @@ typedef struct {
 #define TRISE (*(volatile unsigned char *)0x89)
 
 /*SPECIAL FUNCTIONS*/
-#define STATUS       (*(volatile unsigned char *)0x03)
+#define  STATUS       (*(volatile unsigned char *)0x03)
 #define OPTIONAL_REG (*(volatile unsigned char *)0x81)
 
 
@@ -140,11 +139,11 @@ extern volatile unsigned char *tris[];
    ========================================================= */
 
 void GPIO_pin_mode(int pin_no, mode_t pin_mode);     // MODE - INPUT OR OUTPUT
-void GPIO_pin_write(int pin_no, state pin_mode);     //STATE - HIGH OR LOW
+void GPIO_pin_write(int pin_no, state pin_state);     //STATE - HIGH OR LOW
 int  GPIO_pin_read(int pin_no);           
 
 
 void port_mode(port port_name, mode_t port_mode);        // MODE - INPUT OR OUTPUT
-void port_write(port port_name, state port_mode);         //STATE - HIGH OR LOW
+void port_write(port port_name, state port_state);         //STATE - HIGH OR LOW
 int  port_read(port n);                 
 #end if
