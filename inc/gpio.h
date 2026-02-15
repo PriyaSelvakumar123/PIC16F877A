@@ -1,4 +1,4 @@
-
+#include<stdint>
 GPIO.H
 
 #ifndef GPIO_H
@@ -100,7 +100,7 @@ typedef struct {
 #define PORTA (*(volatile unsigned char *)0x05)
 #define portabits (*(volatile register_a_bits*)0X05)
 #define TRISA (*(volatile unsigned char *)0x85)
-#define ADCON1(*(volatile unsigned char *)0x9F)                   /* SET PORTA AS DIGITAL IO PIN */
+#define ADCON1 (*(volatile unsigned char *)0x9F)                   /* SET PORTA AS DIGITAL IO PIN */
 
 /* PORTB */
 #define PORTB (*(volatile unsigned char *)0x06)
