@@ -3,6 +3,6 @@
    KEYPAD
    ========================================================= */
 
-void keypad_scan_calculator(port n,port m);  //PORT_NAME (KEYPAD),PORT_NAME(SEVEN SEG)
+void keypad_scan_calculator(port keypad,port sevenseg);  //PORT_NAME (KEYPAD),PORT_NAME(SEVEN SEG)
 
-char keypad_scan_phone(void);                //DEFAULT - PORTB
+uint_8 keypad_scan_phone(void);                //DEFAULT - PORTB
