@@ -1,4 +1,4 @@
-GPIO Driver Library – PIC16F877A (8BIT)
+GPIO Driver Library – PIC16F877A (8 BIT - MICROCONTROLLER)
 
 ⭐A high-performance, register-level GPIO driver library for the Microchip PIC16F877A microcontroller.
 
@@ -31,7 +31,7 @@ Learning Centric:
         Ideal for students and engineers transitiong from library-dependency to bare-metal firmware development.
 
 
-📁 Project StructurePlaintextPIC16F877A-DriverLibrary/
+📁 Project Structure
 
 PIC16F877A-DriverLibrary/
 
@@ -71,16 +71,16 @@ GPIO Control
          Function                                          Description
          
 
-    void GPIO_pin_mode(int pin, mode_t m)    -  Sets a specific physical pin to INPUT or OUTPUT.
+    void GPIO_pin_mode(uint_8 pin, mode_t m)               -  Sets a specific physical pin to INPUT / OUTPUT.
 
 
-    void GPIO_pin_write(int pin, state s)    -  Writes HIGH (1) or LOW (0) to a specific pin.
+    void GPIO_pin_write(uint8_t pin_no, state pin_state)   -  Writes HIGH (1) or LOW (0) to a specific pin.
 
 
-    int GPIO_pin_read(int pin)               -  Returns the current digital state of a pin.
+    uint8_t  GPIO_pin_read(uint8_t pin_no)                 -  Returns the current digital state of a pin.
 
 
-    void port_mode(port n, mode_t m)         -  Configures an entire port (A-E) at once.
+    void port_mode(port port_name, mode_t port_mode)        -  Configures an entire port (A-E) at once.
 
 
     void GPIO_pin_mode(int pin, mode_t m)    -  Sets a specific physical pin to INPUT or OUTPUT.
@@ -114,13 +114,13 @@ Peripherals
         Function                                              Description
 
         
-    seven_segment_ANODE(char a, port n)      -   Displays Hex char (0-F) on Common Anode segment.
+    seven_segment_ANODE(uint_8 a, port n)      -   Displays Hex char (0-F) on Common Anode segment.
 
-    seven_segment_CATHODE(char a, port n)    -   Displays Hex char (0-F) on Common Cathode segment.
+    seven_segment_CATHODE(uint_8 a, port n)    -   Displays Hex char (0-F) on Common Cathode segment.
 
-    keypad_scan_phone()                      -   Scans a 4x3/4x4 keypad and returns the char pressed.
+    uint_8 keypad_scan_phone()                      -   Scans a 4x3/4x4 keypad and returns the char pressed.
 
-    dot_alphabet(char a, port n1, port n2)   -   Renders an uppercase letter on an 8x8 LED Matrix.
+    dot_alphabet(uint_8 a, port n1, port n2)   -   Renders an uppercase letter on an 8x8 LED Matrix.
 
 
 🧠 Technical ReferenceMicrocontroller:
