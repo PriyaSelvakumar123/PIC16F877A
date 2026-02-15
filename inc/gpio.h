@@ -104,22 +104,22 @@ typedef struct {
 
 /* PORTB */
 #define PORTB (*(volatile unsigned char *)0x06)
-#define portbbits (*(volatile unsigned register_b_bits *)0X06)
+#define portbbits (*(volatile register_b_bits *)0X06)
 #define TRISB (*(volatile unsigned char *)0x86)
 
 /* PORTC */
 #define PORTC (*(volatile unsigned char *)0x07)
-#define portcbits (*(volatile unsigned register_c_bits * ) 0X07)
+#define portcbits (*(volatile register_c_bits * ) 0X07)
 #define TRISC (*(volatile unsigned char *)0x87)
 
 /* PORTD */
 #define PORTD (*(volatile unsigned char *)0x08)
-#define portdbits (*(volatile unsigned register_d_bits * )0X08)
+#define portdbits (*(volatile register_d_bits * )0X08)
 #define TRISD (*(volatile unsigned char *)0x88)
 
 /* PORTE */
 #define PORTE (*(volatile unsigned char *)0x09)
-#define portebits (*(volatile unsigned register_e_bits *)0X09)
+#define portebits (*(volatile register_e_bits *)0X09)
 #define TRISE (*(volatile unsigned char *)0x89)
 
 /*SPECIAL FUNCTIONS*/
