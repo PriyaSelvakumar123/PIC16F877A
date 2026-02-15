@@ -4,4 +4,4 @@
    DOT MATRIX
    ========================================================= */
 
-void dot_alphabet(const unsigned char a, port n1, port n2);
+void dot_alphabet(const uint_8 a, port n1, port n2);
