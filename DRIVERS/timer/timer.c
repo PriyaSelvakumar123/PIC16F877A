@@ -1,4 +1,4 @@
-#include "timers.h"
+#include "timer.h"
 
 volatile unsigned int ms_counter = 0;
 
