@@ -40,6 +40,6 @@ void main()
 
     while(1)
     {
-        UART_WriteString("SUJAN..\n\r");
+        UART_WriteString("UART WORKING..\n\r");
     }
 }
