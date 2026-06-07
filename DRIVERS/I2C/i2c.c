@@ -1,3 +1,5 @@
+#include"i2c"
+
 void I2C_Init(void)
 {
     TRISC = 0x18;        // RC3=SCL input, RC4=SDA input
