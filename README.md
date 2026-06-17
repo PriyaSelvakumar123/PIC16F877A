@@ -9,44 +9,44 @@ Developed using bare-metal register-level programming and software bit-banging t
 
 # 🔧 Features
 
-### GPIO Driver
+### 📌 GPIO Driver
 
 * Full support for PORTA, PORTB, PORTC, PORTD, and PORTE.
 * Pin-level and port-level configuration.
 * Direct TRISx and PORTx register manipulation.
 * ADCON1 digital I/O configuration support.
 
-### I2C Driver
+### 📌 I2C Driver
 
 * Hardware MSSP-based I2C communication.
 * Master mode support.
 * EEPROM and sensor interfacing.
 
-### I2C Bit-Banging Driver
+### 📌 I2C Bit-Banging Driver
 
 * Software-based I2C implementation.
 * No hardware MSSP dependency.
 * Flexible GPIO-based communication.
 
-### UART Driver
+### 📌 UART Driver
 
 * Hardware UART communication.
 * Configurable baud rate.
 * TX and RX support.
 
-### UART Bit-Banging Driver
+### 📌 UART Bit-Banging Driver
 
 * Software serial communication.
 * Useful when hardware UART is unavailable.
 
-### Timer Driver
+### 📌 Timer Driver
 
 * Timer0 support.
 * Timer1 support.
 * Timer2 support.
 * Delay and timing applications.
 
-### Middleware Components
+### 📌 Middleware Components
 
 * Seven Segment Display Driver.
 * 8×8 LED Dot Matrix Driver.
@@ -196,11 +196,7 @@ The I2C bus uses open-drain/open-collector outputs for both SDA and SCL lines. T
 
 Typical Connection:
 
-+5V
- │
- ├── 4.7kΩ ── SDA
- │
- └── 4.7kΩ ── SCL
+
 ---
 
 # 🧠 Technical Specifications
