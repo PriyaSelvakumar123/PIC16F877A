@@ -1,0 +1,11 @@
+#include "I2C_bitbanking.h"
+
+#define _XTAL_FREQ 20000000UL
+
+
+void main()
+{
+   // I2C_Init();
+   //send_8bit(0x20);
+   I2C_writechar(0x50, 'A');         //      I2C_writechar(Address of the slave, 'A');      
+}
