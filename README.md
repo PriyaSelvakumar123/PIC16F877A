@@ -1,142 +1,266 @@
-GPIO Driver Library – PIC16F877A (8 BIT - MICROCONTROLLER)
+# PIC16F877A Driver Library
 
-⭐A high-performance, register-level GPIO driver library for the Microchip PIC16F877A microcontroller.
+⭐ **A high-performance register-level peripheral driver library for the Microchip PIC16F877A microcontroller.**
 
-
-Developed using pure register-level programming (bypassing standard built-in header libraries where possible) to provide deep control over hardware and minimize overhead.
-
-
-🔧 FeaturesFull Port Control: 
-
-        Comprehensive support for PORTA through PORTE.
-        
-Register-Based: 
-
-        Direct manipulation of TRISx and PORTx registers.
-        
-ADC Management:
-
-        Automatic disabling of analog functions via ADCON1 for digital I/O stability.
-        
-Seven-Segment Support: 
-
-        Dedicated APIs for Common Anode/Cathode displays (Hexadecimal support).
-        
-Matrix & Keypad:
-
-        Integrated drivers for 8x8 LED Dot Matrices and 4x4 Keypad scanning (Phone/Calculator layouts).
-        
-Learning Centric:
-
-        Ideal for students and engineers transitiong from library-dependency to bare-metal firmware development.
+Developed using bare-metal register-level programming and software bit-banging techniques, this library provides modular and reusable drivers for PIC16F877A peripherals. It demonstrates a strong understanding of microcontroller architecture, communication protocols, hardware interfacing, and low-level embedded firmware development.
 
 
-📁 Project Structure
+---
 
+# 🔧 Features
+
+### GPIO Driver
+
+* Full support for PORTA, PORTB, PORTC, PORTD, and PORTE.
+* Pin-level and port-level configuration.
+* Direct TRISx and PORTx register manipulation.
+* ADCON1 digital I/O configuration support.
+
+### I2C Driver
+
+* Hardware MSSP-based I2C communication.
+* Master mode support.
+* EEPROM and sensor interfacing.
+
+### I2C Bit-Banging Driver
+
+* Software-based I2C implementation.
+* No hardware MSSP dependency.
+* Flexible GPIO-based communication.
+
+### UART Driver
+
+* Hardware UART communication.
+* Configurable baud rate.
+* TX and RX support.
+
+### UART Bit-Banging Driver
+
+* Software serial communication.
+* Useful when hardware UART is unavailable.
+
+### Timer Driver
+
+* Timer0 support.
+* Timer1 support.
+* Timer2 support.
+* Delay and timing applications.
+
+### Middleware Components
+
+* Seven Segment Display Driver.
+* 8×8 LED Dot Matrix Driver.
+* 4×4 Keypad Driver.
+* LED Driver.
+
+---
+
+# 📁 Project Structure
+
+```text
 PIC16F877A-DriverLibrary/
 
-├── inc/                        # Header files
+├── DRIVERS
+│
+│   ├── GPIO
+│   │   ├── gpio.c
+│   │   └── gpio.h
+│   │
+│   ├── I2C
+│   │   ├── i2c.c
+│   │   └── i2c.h
+│   │
+│   ├── I2C_BitBanging
+│   │   ├── i2c_bitbanging.c
+│   │   └── i2c_bitbanging.h
+│   │
+│   ├── UART
+│   │   ├── uart.c
+│   │   └── uart.h
+│   │
+│   ├── UART_BitBanging
+│   │   ├── uart_bitbanging.c
+│   │   └── uart_bitbanging.h
+│   │
+│   └── TIMER
+│       ├── timer.c
+│       └── timer.h
+│
+├── MIDDLEWARE
+│   ├── sevensegment
+│   ├── dotmatrix
+│   ├── keypad
+│   └── led
+│
+├── EXAMPLE_CODES
+│
+├── PROJECTS
+│
+├── EXAMPLES
+│
+└── README.md
+```
 
-│   ├── gpio.h              
+---
 
-│   ├── display.h           
+# 📌 GPIO API Reference
 
-│   └── keypad.h           
+| Function                                            | Description                        |
+| --------------------------------------------------- | ---------------------------------- |
+| `void GPIO_pin_mode(uint8_t pin, mode_t mode)`      | Configure a pin as INPUT or OUTPUT |
+| `void GPIO_pin_write(uint8_t pin, state pin_state)` | Write HIGH or LOW to a pin         |
+| `uint8_t GPIO_pin_read(uint8_t pin)`                | Read pin state                     |
+| `void port_mode(port port_name, mode_t mode)`       | Configure an entire port           |
 
-├── src/                        # Implementation files
+---
 
-│   ├── gpio.c             
+# 📌 Middleware API Reference
 
-│   ├── led.c               
+| Function                                                 | Description                                         |
+| -------------------------------------------------------- | --------------------------------------------------- |
+| `seven_segment_ANODE(uint8_t value, port p)`             | Display hexadecimal value on Common Anode display   |
+| `seven_segment_CATHODE(uint8_t value, port p)`           | Display hexadecimal value on Common Cathode display |
+| `uint8_t keypad_scan_phone(void)`                        | Scan keypad and return pressed key                  |
+| `dot_alphabet(uint8_t ch, port row_port, port col_port)` | Display alphabet on 8×8 LED matrix                  |
 
-│   ├── seven_segment.c     
+---
 
-│   ├── keypad.c            
+# ⚠️ Critical Hardware Notes
 
-│   └── dotmatrix.c         
+# GPIO 
 
-├── examples/              
+## ADCON1 Register Configuration
 
-│   ├── LIFT_System.c       
+PIC16F877A powers up with PORTA and PORTE configured as analog inputs.
 
-│   └── counters.c          
+To use them as digital GPIO:
 
-└── README.md                  # Project documentation
+```c
+ADCON1 = 0x06;
+```
 
+or
 
-📌 Core API Reference
+```c
+ADCON1 = 0x07;
+```
 
-GPIO Control
-         
-         Function                                          Description
-         
+This disables analog functionality and enables proper digital I/O operation.
 
-    void GPIO_pin_mode(uint_8 pin, mode_t m)               -  Sets a specific physical pin to INPUT / OUTPUT.
+---
 
+## RA4 Open-Drain Output
 
-    void GPIO_pin_write(uint8_t pin_no, state pin_state)   -  Writes HIGH (1) or LOW (0) to a specific pin.
+RA4 behaves differently from other GPIO pins.
 
+### Characteristics
 
-    uint8_t  GPIO_pin_read(uint8_t pin_no)                 -  Returns the current digital state of a pin.
+* Can actively drive LOW.
+* Cannot actively drive HIGH.
 
+### Requirement
 
-    void port_mode(port port_name, mode_t port_mode)        -  Configures an entire port (A-E) at once.
+Use an external pull-up resistor:
 
+```text
+RA4 ---- 10kΩ ---- +5V
+```
 
-    void GPIO_pin_mode(int pin, mode_t m)    -  Sets a specific physical pin to INPUT or OUTPUT.
+Without a pull-up resistor, RA4 may not operate correctly as a digital output.
 
+---
 
-⚠️ Critical Hardware Notes for GPIO
+## PORTB Internal Pull-Ups
 
-⚠️ The ADCON1 Register
+The keypad driver enables internal weak pull-ups:
 
- On the PIC16F877A, PORTA and PORTE pins are multiplexed with Analog-to-Digital Converter (ADC) inputs. On power-up, they default to Analog mode.
+```c
+OPTION_REG &= ~(1 << 7);
+```
 
-📚  Fix: To use them as digital GPIO, you must set ADCON1 = 0x06 (or 0x07). This switches the  pins to Digital mode so your TRIS settings actually take effect.
-    
-⚠️The Open-Drain Pin (RA4)
+Benefits:
 
-Pin RA4 is unique. It is an Open-Drain output.
+* Eliminates external pull-up resistors.
+* Reduces hardware complexity.
+* Simplifies keypad interfacing.
 
-  📚  Behavior: It can pull a signal to Ground (LOW), but it cannot pull it to VCC (HIGH) on its own.
-  
-  📚  Requirement: You must use an external pull-up resistor (typically 10k ohm) if you want to use RA4 as a digital output.
-  
-⚠️PORTB Pull-ups
+##PROTOCALS
 
-  📚  Your keypad.c driver uses OPTION_REG &= ~(1<<7). This enables internal weak pull-up resistors on PORTB. This is a great hardware-saving feature that eliminates the need for 8 external resistors 
-  
-  when connecting a keypad.
+##I2C
 
+⚠️ I2C Pull-Up Resistors
 
-Peripherals
+The I2C bus uses open-drain/open-collector outputs for both SDA and SCL lines. Therefore, the PIC16F877A cannot drive these lines HIGH directly.
 
-        Function                                              Description
+📚 Requirement: External pull-up resistors must be connected to both SDA and SCL lines.
 
-        
-    seven_segment_ANODE(uint_8 a, port n)      -   Displays Hex char (0-F) on Common Anode segment.
+Typical Connection:
 
-    seven_segment_CATHODE(uint_8 a, port n)    -   Displays Hex char (0-F) on Common Cathode segment.
++5V
+ │
+ ├── 4.7kΩ ── SDA
+ │
+ └── 4.7kΩ ── SCL
+---
 
-    uint_8 keypad_scan_phone()                      -   Scans a 4x3/4x4 keypad and returns the char pressed.
+# 🧠 Technical Specifications
 
-    dot_alphabet(uint_8 a, port n1, port n2)   -   Renders an uppercase letter on an 8x8 LED Matrix.
+| Parameter                   | Value       |
+| --------------------------- | ----------- |
+| Microcontroller             | PIC16F877A  |
+| Architecture                | 8-bit PIC   |
+| Compiler                    | XC8         |
+| IDE                         | MPLAB X IDE |
+| Simulator                   | Proteus     |
+| Debugger                    | PICkit 3    |
+| Recommended Clock Frequency | 20 MHz      |
 
+---
 
-🧠 Technical ReferenceMicrocontroller:
+# 📂 Example Applications
 
-PIC16F877AClock Frequency: Recommended 20MHz (Standard for __delay_ms)
+### Example Codes
 
-Compiler       : XC8 (MPLAB X IDE)
+* GPIO Testing
+* UART Communication
+* I2C EEPROM Interface
+* Timer Delay Applications
+* Seven Segment Counter
 
-simulator      : PROTEUS  
+### Projects
 
-Debugging tool : PIC it3
+* Lift Controller System
+* Digital Counter
+* Display Interface Projects
+* Sensor Interfacing Projects
 
-Datasheet: https://ww1.microchip.com/downloads/en/devicedoc/39582b.pdf
+---
 
-⚖️ License
+# 📚 Datasheet
 
-This project is open-source. Feel free to use, modify, and distribute for educational and 
+PIC16F877A Datasheet
 
-commercial hardware testing.
+https://ww1.microchip.com/downloads/en/devicedoc/39582b.pdf
+
+---
+
+# 👨‍💻 Author
+
+**PRIYA DHARSHINI S**
+
+Electronics and Communication Engineering (ECE)
+
+Embedded Systems | Firmware Development | Microcontroller Programming
+
+---
+
+# ⚖️ License
+
+This project is open-source and may be used, modified, and distributed for:
+
+* Educational purposes
+* Research projects
+* Embedded systems learning
+* Commercial hardware testing
+
+Contributions, bug reports, and feature requests are welcome.
